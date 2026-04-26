@@ -77,6 +77,12 @@ export default definePlugin({
 	},
 
 	routes: {
+		admin: {
+			handler: async (_routeCtx, _ctx) => {
+				return { blocks: [] };
+			},
+		},
+
 		current: {
 			public: true,
 			handler: async (_routeCtx, ctx) => {
