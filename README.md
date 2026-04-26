@@ -1,6 +1,6 @@
 # plugin-rotating-tagline
 
-An [EmDash CMS](https://github.com/emdash-cms/emdash) plugin that rotates your site tagline from a configurable list of lines.
+An [EmDash CMS](https://github.com/emdash-cms/emdash) plugin that rotates your site tagline from a configurable list.
 
 ## Installation
 
@@ -35,27 +35,31 @@ Once installed, go to **Plugins → Rotating Tagline → Settings** in the EmDas
 
 ## Using the Tagline in Your Theme
 
-The plugin makes the current tagline available three ways:
-
-### 1. Meta tag (all pages)
+### Meta tag (all pages)
 
 EmDash injects `<meta name="tagline" content="...">` into every page's `<head>` automatically, as long as your template includes `<EmDashHead />`.
 
-### 2. JavaScript global
+Read it in JavaScript with:
 
 ```js
-const tagline = window.EMDASH_TAGLINE;
+const tagline = document.querySelector('meta[name="tagline"]')?.content;
 ```
 
-Set in a `<script>` in `<head>` before your page renders. Useful for client-side frameworks.
+### API route
 
-### 3. API route
+Fetch the current tagline directly (useful for server-side rendering or client-side hydration):
 
 ```ts
-// In an Astro component
 const res = await fetch("/_emdash/api/plugins/rotating-tagline/current");
 const { tagline } = await res.json();
 ```
+
+## Verifying It Works
+
+After adding at least one tagline in Settings:
+
+1. **API route** — visit `/_emdash/api/plugins/rotating-tagline/current` in your browser; you should see `{"tagline":"..."}`.
+2. **Meta tag** — view source on any page that includes `<EmDashHead />`; look for `<meta name="tagline" content="...">` in `<head>`.
 
 ## License
 
