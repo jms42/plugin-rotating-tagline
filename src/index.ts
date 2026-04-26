@@ -7,5 +7,6 @@ export function rotatingTaglinePlugin(): PluginDescriptor {
 		format: "standard",
 		entrypoint: "plugin-rotating-tagline/sandbox",
 		options: {},
+		adminPages: [{ path: "/settings", label: "Settings", icon: "settings" }],
 	};
 }
