@@ -58,7 +58,7 @@ async function getCurrentTagline(ctx: PluginContext): Promise<string | null> {
 export default definePlugin({
 	hooks: {
 		"plugin:install": {
-			handler: async (_event, ctx) => {
+			handler: async (_event: unknown, ctx: PluginContext) => {
 				await ctx.kv.set("settings:taglines", "");
 				await ctx.kv.set("settings:mode", "random");
 				await ctx.kv.set("state:currentIndex", 0);
@@ -66,7 +66,7 @@ export default definePlugin({
 		},
 
 		"page:metadata": {
-			handler: async (_event, ctx) => {
+			handler: async (_event: unknown, ctx: PluginContext) => {
 				const tagline = await getCurrentTagline(ctx);
 				if (!tagline) return null;
 				return [{ kind: "meta" as const, name: "tagline", content: tagline }];
@@ -74,7 +74,7 @@ export default definePlugin({
 		},
 
 		"page:fragments": {
-			handler: async (_event, ctx) => {
+			handler: async (_event: unknown, ctx: PluginContext) => {
 				const tagline = await getCurrentTagline(ctx);
 				if (!tagline) return null;
 				return [
@@ -114,7 +114,7 @@ export default definePlugin({
 
 		current: {
 			public: true,
-			handler: async (_routeCtx, ctx) => {
+			handler: async (_routeCtx: unknown, ctx: PluginContext) => {
 				const tagline = await getCurrentTagline(ctx);
 				return { tagline };
 			},

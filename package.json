@@ -4,8 +4,13 @@
 	"description": "EmDash plugin that rotates the site tagline from a configurable list",
 	"type": "module",
 	"exports": {
-		".": "./src/index.ts",
-		"./sandbox": "./src/sandbox-entry.ts"
+		".": "./dist/index.js",
+		"./sandbox": "./dist/sandbox-entry.js"
+	},
+	"files": ["dist"],
+	"scripts": {
+		"build": "tsup src/index.ts src/sandbox-entry.ts --format esm --dts",
+		"prepublishOnly": "npm run build"
 	},
 	"keywords": ["emdash", "cms", "plugin", "tagline"],
 	"license": "MIT",
@@ -13,6 +18,7 @@
 		"emdash": ">=0.1.0"
 	},
 	"devDependencies": {
+		"tsup": "^8.0.0",
 		"typescript": "^5.0.0"
 	}
 }
