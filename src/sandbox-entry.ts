@@ -81,7 +81,11 @@ export default definePlugin({
 					{
 						kind: "inline-script" as const,
 						placement: "head" as const,
-						code: `window.EMDASH_TAGLINE = ${JSON.stringify(tagline)};`,
+						code: `window.EMDASH_TAGLINE = ${JSON.stringify(tagline)};
+document.addEventListener("DOMContentLoaded", function() {
+  var el = document.querySelector(".footer-tagline");
+  if (el) el.textContent = window.EMDASH_TAGLINE;
+});`,
 					},
 				];
 			},

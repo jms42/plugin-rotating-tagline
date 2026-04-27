@@ -1,6 +1,6 @@
 {
 	"name": "plugin-rotating-tagline",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "EmDash plugin that rotates the site tagline from a configurable list",
 	"type": "module",
 	"exports": {
